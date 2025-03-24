@@ -5,67 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boykot Listesi</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; margin: 0; }
-        .brand { display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid #ccc; }
-        .brand img { max-width: 100px; height: auto; margin-bottom: 10px; }
-        .alternative { color: green; font-weight: bold; }
-        input[type="text"] { width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; }
-        h1 { text-align: center; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .group {
+            margin-bottom: 10px;
+        }
+        .group-title {
+            background: #ddd;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .brand-list {
+            display: none;
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+        .brand {
+            font-size: 16px;
+            font-weight: bold;
+            color: red;
+        }
+        .brand::before {
+            content: "❌ ";
+        }
+        .alternatives {
+            font-size: 14px;
+            color: gray;
+            opacity: 0.7;
+            margin-left: 10px;
+        }
+        .alternatives::before {
+            content: "✔️ ";
+        }
     </style>
 </head>
 <body>
 
-<h1>Boykot Edilen Markalar</h1>
-<input type="text" id="search" placeholder="Marka ara..." onkeyup="filterBrands()">
-
-<div id="brand-list"></div>
+<div class="container">
+    <h2>Boykot Listesi</h2>
+    <div id="brand-container"></div>
+</div>
 
 <script>
-    let brandsData = [];
-    // JSON dosyasını GitHub'dan çek
     fetch('https://raw.githubusercontent.com/boykotliste/boykot/main/markalar.json')
         .then(response => response.json())
         .then(data => {
-            brandsData = data;  // JSON verisini al ve brandsData'ya ata
-            displayBrands(brandsData);  // Veriyi ekrana bastır
+            const container = document.getElementById("brand-container");
+            container.innerHTML = "";
+
+            Object.keys(data).forEach(anagrup => {
+                const groupDiv = document.createElement("div");
+                groupDiv.classList.add("group");
+
+                const groupTitle = document.createElement("div");
+                groupTitle.classList.add("group-title");
+                groupTitle.textContent = anagrup;
+                groupDiv.appendChild(groupTitle);
+
+                const brandList = document.createElement("div");
+                brandList.classList.add("brand-list");
+
+                data[anagrup].forEach(item => {
+                    const brandItem = document.createElement("div");
+                    brandItem.classList.add("brand");
+                    brandItem.textContent = item.Markaadı;
+                    brandList.appendChild(brandItem);
+
+                    if (item.Alternatifler && item.Alternatifler.length > 0) {
+                        const altItem = document.createElement("div");
+                        altItem.classList.add("alternatives");
+                        altItem.textContent = item.Alternatifler.join(", ");
+                        brandList.appendChild(altItem);
+                    }
+                });
+
+                groupDiv.appendChild(brandList);
+                container.appendChild(groupDiv);
+
+                groupTitle.addEventListener("click", () => {
+                    brandList.style.display = brandList.style.display === "none" ? "block" : "none";
+                });
+            });
         })
-        .catch(error => console.error('Error loading JSON:', error));
-
-    // Veriyi ekrana bastıran fonksiyon
-    function displayBrands(data) {
-        const brandList = document.getElementById("brand-list");
-        brandList.innerHTML = ''; // Önceden var olan içeriği temizle
-
-        data.forEach(group => {
-            const groupDiv = document.createElement("div");
-            groupDiv.classList.add("brand");
-
-            const groupTitle = document.createElement("h3");
-            groupTitle.textContent = group.Anagrupadi;
-            groupDiv.appendChild(groupTitle);
-
-            const brandName = document.createElement("p");
-            brandName.textContent = group.Markaadı;
-            groupDiv.appendChild(brandName);
-
-            const alternatives = document.createElement("p");
-            alternatives.classList.add("alternative");
-            alternatives.textContent = `Alternatifler: ${group.Alternatifler.join(", ")}`;
-            groupDiv.appendChild(alternatives);
-
-            brandList.appendChild(groupDiv);
-        });
-    }
-
-    // Arama fonksiyonu
-    function filterBrands() {
-        const searchValue = document.getElementById("search").value.toLowerCase();
-        const filteredBrands = brandsData.filter(brand => 
-            brand.Markaadı.toLowerCase().includes(searchValue) || 
-            brand.Anagrupadi.toLowerCase().includes(searchValue)
-        );
-        displayBrands(filteredBrands);
-    }
+        .catch(error => console.error('JSON yüklenirken hata oluştu:', error));
 </script>
 
 </body>
