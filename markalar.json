@@ -133,7 +133,9 @@
         { "Marka": "Vogue Restaurant & Bar", "Alts": [] },
         { "Marka": "Vouge", "Alts": [] },
         { "Marka": "Zingat", "Alts": [] },
-        { "Marka": "Zuma", "Alts": [] }
+        { "Marka": "Zuma", "Alts": [] },
+         { "Marka": "NTV", "Alts": [] },
+        { "Marka": "Star TV", "Alts": [] }
     ],
     "Can Grubu": [
         { "Marka": "Awox", "Alts": [] },
@@ -191,5 +193,21 @@
         { "Marka": "Sadece Kitap", "Alts": [] },
         { "Marka": "Taç", "Alts": [] },
         { "Marka": "Tüyap Kitap Fuarı", "Alts": [] }
-    ]
+    ],
+    "Ciner Medya Grubu": [
+        { "Marka": "Show TV", "Alts": [] },
+        { "Marka": "Bloomberg HT", "Alts": [] }
+    ],
+    "Acun Medya": [
+        { "Marka": "TV8", "Alts": [] }
+    ],
+    "Türkiye Radyo Televizyon Kurumu": [
+        { "Marka": "TRT", "Alts": [] }
+    ],
+    "Türkiye'nin Otomobili Girişim Grubu": [
+        { "Marka": "TOGG", "Alts": [] }
+    ],
+    "İHH": [
+        { "Marka": "İHH", "Alts": [] }
+    ],
 }
