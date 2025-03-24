@@ -1,15 +1,11 @@
-{
-    "Can Grubu": [
-        { "Marka": "Awox", "Alts": [] },
-        { "Marka": "Energy Petrol", "Alts": [] },
-        { "Marka": "Energia", "Alts": [] },
-        { "Marka": "Golden Hill Hotel", "Alts": [] },
-        { "Marka": "İstanbul Bilgi Üniversitesi Vakfı", "Alts": [] },
-        { "Marka": "İTÜ ETA Vakfı Doğa Koleji", "Alts": [] },
-        { "Marka": "Mediza Hospital", "Alts": [] },
-        { "Marka": "Telefox", "Alts": [] },
-        { "Marka": "Tectone", "Alts": [] },
-        { "Marka": "VIP Transport", "Alts": [] }
+{  
+    "Yıldız Grubu": [
+        { "Marka": "ŞOK", "Alts": [] },
+        { "Marka": "Superfresh", "Alts": [] },
+        { "Marka": "Aytaç Et", "Alts": [] },
+        { "Marka": "Ülker", "Alts": [] },
+        { "Marka": "Godiva", "Alts": [] },
+        { "Marka": "Dolby Tıraş Bıçakları", "Alts": [] }
     ],
     "Demirören Grubu": [
         { "Marka": "D-Smart", "Alts": [] },
@@ -23,6 +19,12 @@
         { "Marka": "Sisal Şans", "Alts": [] },
         { "Marka": "Su-Tur Sun Turizm San. A.Ş.", "Alts": [] },
         { "Marka": "Uyum Gıda", "Alts": [] }
+    ],
+    "Bankalar": [
+        { "Marka": "Halk Bank", "Alts": [] },
+        { "Marka": "Ziraat Bankası", "Alts": [] },
+        { "Marka": "Vakıf Bank", "Alts": [] },
+        { "Marka": "Yapı Kredi", "Alts": [] }
     ],
     "Doğuş Grubu": [
         { "Marka": "Adile Sultan Sarayı Kandilli", "Alts": [] },
@@ -106,6 +108,18 @@
         { "Marka": "Vouge", "Alts": [] },
         { "Marka": "Zingat", "Alts": [] },
         { "Marka": "Zuma", "Alts": [] }
+    ],
+    "Can Grubu": [
+        { "Marka": "Awox", "Alts": [] },
+        { "Marka": "Energy Petrol", "Alts": [] },
+        { "Marka": "Energia", "Alts": [] },
+        { "Marka": "Golden Hill Hotel", "Alts": [] },
+        { "Marka": "İstanbul Bilgi Üniversitesi Vakfı", "Alts": [] },
+        { "Marka": "İTÜ ETA Vakfı Doğa Koleji", "Alts": [] },
+        { "Marka": "Mediza Hospital", "Alts": [] },
+        { "Marka": "Telefox", "Alts": [] },
+        { "Marka": "Tectone", "Alts": [] },
+        { "Marka": "VIP Transport", "Alts": [] }
     ],
     "Rönesans Grubu": [
         { "Marka": "Adana Optimum", "Alts": [] },
