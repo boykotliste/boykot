@@ -22,13 +22,13 @@
             text-align: center;
         }
         .search-box {
-            width: 100%;
+            width: calc(100% - 20px); /* Prevents overflow */
             padding: 10px;
             font-size: 16px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box; /* Ensure the search box doesn't overflow */
+            box-sizing: border-box; /* Ensure padding is included in width */
         }
         .group {
             margin-bottom: 10px;
@@ -40,13 +40,13 @@
             font-weight: bold;
             border-radius: 5px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
         }
         .group-title span {
             cursor: pointer;
             font-size: 20px;
-            margin-right: 10px; /* Adds some space between the collapse button and the text */
+            margin-right: 5px; /* Reduced space between button and text */
         }
         .brand-list {
             display: none;
@@ -100,19 +100,17 @@
         const container = document.getElementById("brand-container");
         container.innerHTML = "";
 
-        let filteredGroups = 0; // Filtered groups count
+        let filteredGroups = 0;
 
         Object.keys(jsonData).forEach(Grup => {
             const groupDiv = document.createElement("div");
             groupDiv.classList.add("group");
 
-            // Check if any brand or alternative matches the filter
             const filteredItems = jsonData[Grup].filter(item =>
                 item.Marka.toLowerCase().includes(filter) || 
                 item.Alts.some(alt => alt.toLowerCase().includes(filter))
             );
 
-            // If no items matched, skip this group
             if (filteredItems.length === 0 && filter !== "") return;
 
             filteredGroups++;
@@ -125,7 +123,6 @@
             groupTitle.appendChild(collapseButton);
 
             groupTitle.appendChild(document.createTextNode(Grup));
-
             groupDiv.appendChild(groupTitle);
 
             const brandList = document.createElement("div");
@@ -154,14 +151,12 @@
                 collapseButton.textContent = brandList.style.display === "none" ? ">" : "↓";
             });
 
-            // Automatically show the group if filter is active
             if (filter) {
                 brandList.style.display = "block";
                 collapseButton.textContent = "↓";
             }
         });
 
-        // If no results after filtering, display message
         if (filteredGroups === 0 && filter) {
             const noResults = document.createElement("div");
             noResults.textContent = "Hiçbir sonuç bulunamadı.";
