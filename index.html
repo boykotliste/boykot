@@ -135,4 +135,46 @@
                 const brandItem = document.createElement("div");
                 brandItem.classList.add("brand");
 
-                brandItem.textContent = item
+                brandItem.textContent = item.Marka;
+                brandList.appendChild(brandItem);
+
+                if (item.Alts && item.Alts.length > 0) {
+                    const altItem = document.createElement("div");
+                    altItem.classList.add("alternatives");
+                    altItem.textContent = item.Alts.join(", ");
+                    brandList.appendChild(altItem);
+                }
+            });
+
+            groupDiv.appendChild(brandList);
+            container.appendChild(groupDiv);
+
+            collapseButton.addEventListener("click", () => {
+                brandList.style.display = brandList.style.display === "none" ? "block" : "none";
+                collapseButton.textContent = brandList.style.display === "none" ? ">" : "↓";
+            });
+
+            // Automatically show the group if filter is active
+            if (filter) {
+                brandList.style.display = "block";
+                collapseButton.textContent = "↓";
+            }
+        });
+
+        // If no results after filtering, display message
+        if (filteredGroups === 0 && filter) {
+            const noResults = document.createElement("div");
+            noResults.textContent = "Hiçbir sonuç bulunamadı.";
+            container.appendChild(noResults);
+        }
+    }
+
+    document.getElementById("search").addEventListener("input", (e) => {
+        renderList(e.target.value.toLowerCase());
+    });
+
+    loadData();
+</script>
+
+</body>
+</html>
