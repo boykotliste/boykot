@@ -149,7 +149,7 @@
             // Always ensure the collapse button works
             groupTitle.addEventListener("click", () => {
                 // Toggle the display on each click
-                const isHidden = brandList.style.display === "none";
+                const isHidden = brandList.style.display === "block";
                 brandList.style.display = isHidden ? "block" : "none";
                 collapseButton.textContent = isHidden ? "↓" : ">";
             });
