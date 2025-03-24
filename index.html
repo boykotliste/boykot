@@ -91,34 +91,34 @@
         const container = document.getElementById("brand-container");
         container.innerHTML = "";
 
-        Object.keys(jsonData).forEach(anagrup => {
+        Object.keys(jsonData).forEach(Grup => {
             const groupDiv = document.createElement("div");
             groupDiv.classList.add("group");
 
             const groupTitle = document.createElement("div");
             groupTitle.classList.add("group-title");
-            groupTitle.textContent = anagrup;
+            groupTitle.textContent = Grup;
             groupDiv.appendChild(groupTitle);
 
             const brandList = document.createElement("div");
             brandList.classList.add("brand-list");
 
-            jsonData[anagrup].forEach(item => {
+            jsonData[Grup].forEach(item => {
                 const brandItem = document.createElement("div");
                 brandItem.classList.add("brand");
 
-                if (filter && !item.Markaadı.toLowerCase().includes(filter) &&
-                    !item.Alternatifler.some(alt => alt.toLowerCase().includes(filter))) {
+                if (filter && !item.Marka.toLowerCase().includes(filter) &&
+                    !item.Alts.some(alt => alt.toLowerCase().includes(filter))) {
                     return;
                 }
 
-                brandItem.textContent = item.Markaadı;
+                brandItem.textContent = item.Marka;
                 brandList.appendChild(brandItem);
 
-                if (item.Alternatifler && item.Alternatifler.length > 0) {
+                if (item.Alts && item.Alts.length > 0) {
                     const altItem = document.createElement("div");
                     altItem.classList.add("alternatives");
-                    altItem.textContent = item.Alternatifler.join(", ");
+                    altItem.textContent = item.Alts.join(", ");
                     brandList.appendChild(altItem);
                 }
             });
