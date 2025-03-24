@@ -38,6 +38,13 @@
             cursor: pointer;
             font-weight: bold;
             border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .group-title span {
+            cursor: pointer;
+            font-size: 20px;
         }
         .brand-list {
             display: none;
@@ -69,7 +76,7 @@
 <div class="container">
     <h2>Boykot Listesi</h2>
     <input type="text" id="search" class="search-box" placeholder="Marka veya alternatif ara...">
-    <div id="brand-list">Yükleniyor...</div>
+    <div id="brand-container">Yükleniyor...</div>
 </div>
 
 <script>
@@ -83,34 +90,46 @@
             renderList();
         } catch (error) {
             console.error('JSON yüklenirken hata oluştu:', error);
-            document.getElementById("brand-list").textContent = "Veri yüklenemedi.";
+            document.getElementById("brand-container").textContent = "Veri yüklenemedi.";
         }
     }
 
     function renderList(filter = "") {
-        const container = document.getElementById("brand-list");
+        const container = document.getElementById("brand-container");
         container.innerHTML = "";
+
+        let filteredGroups = 0; // Filtered groups count
 
         Object.keys(jsonData).forEach(Grup => {
             const groupDiv = document.createElement("div");
             groupDiv.classList.add("group");
 
+            // Check if any brand or alternative matches the filter
+            const filteredItems = jsonData[Grup].filter(item =>
+                item.Marka.toLowerCase().includes(filter) || 
+                item.Alts.some(alt => alt.toLowerCase().includes(filter))
+            );
+
+            // If no items matched, skip this group
+            if (filteredItems.length === 0 && filter !== "") return;
+
+            filteredGroups++;
+
             const groupTitle = document.createElement("div");
             groupTitle.classList.add("group-title");
             groupTitle.textContent = Grup;
+
+            const collapseButton = document.createElement("span");
+            collapseButton.textContent = ">";
+            groupTitle.appendChild(collapseButton);
             groupDiv.appendChild(groupTitle);
 
             const brandList = document.createElement("div");
             brandList.classList.add("brand-list");
 
-            jsonData[Grup].forEach(item => {
+            filteredItems.forEach(item => {
                 const brandItem = document.createElement("div");
                 brandItem.classList.add("brand");
-
-                if (filter && !item.Marka.toLowerCase().includes(filter) &&
-                    !item.Alts.some(alt => alt.toLowerCase().includes(filter))) {
-                    return;
-                }
 
                 brandItem.textContent = item.Marka;
                 brandList.appendChild(brandItem);
@@ -126,10 +145,24 @@
             groupDiv.appendChild(brandList);
             container.appendChild(groupDiv);
 
-            groupTitle.addEventListener("click", () => {
+            collapseButton.addEventListener("click", () => {
                 brandList.style.display = brandList.style.display === "none" ? "block" : "none";
+                collapseButton.textContent = brandList.style.display === "none" ? ">" : "↓";
             });
+
+            // Automatically show the group if filter is active
+            if (filter) {
+                brandList.style.display = "block";
+                collapseButton.textContent = "↓";
+            }
         });
+
+        // If no results after filtering, display message
+        if (filteredGroups === 0 && filter) {
+            const noResults = document.createElement("div");
+            noResults.textContent = "Hiçbir sonuç bulunamadı.";
+            container.appendChild(noResults);
+        }
     }
 
     document.getElementById("search").addEventListener("input", (e) => {
