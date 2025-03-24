@@ -22,9 +22,8 @@
 
 <script>
     let brandsData = [];
-
     // JSON dosyasını GitHub'dan çek
-    fetch('https://raw.githubusercontent.com/yourusername/yourrepo/main/brands.json')
+    fetch('https://raw.githubusercontent.com/boykotliste/boykot/main/markalar.json')
         .then(response => response.json())
         .then(data => {
             brandsData = data;  // JSON verisini al ve brandsData'ya ata
