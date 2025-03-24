@@ -18,6 +18,17 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+        h2 {
+            text-align: center;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         .group {
             margin-bottom: 10px;
         }
@@ -57,57 +68,75 @@
 
 <div class="container">
     <h2>Boykot Listesi</h2>
+    <input type="text" id="search" class="search-box" placeholder="Marka veya alternatif ara...">
     <div id="brand-container">Yükleniyor...</div>
 </div>
 
 <script>
-    fetch('https://raw.githubusercontent.com/boykotliste/boykot/main/markalar.json')
-        .then(response => {
+    let jsonData = {};
+
+    async function loadData() {
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/boykotliste/boykot/main/brands.json');
             if (!response.ok) throw new Error("JSON dosyası yüklenemedi");
-            return response.json();
-        })
-        .then(data => {
-            const container = document.getElementById("brand-container");
-            container.innerHTML = "";
-
-            Object.keys(data).forEach(anagrup => {
-                const groupDiv = document.createElement("div");
-                groupDiv.classList.add("group");
-
-                const groupTitle = document.createElement("div");
-                groupTitle.classList.add("group-title");
-                groupTitle.textContent = anagrup;
-                groupDiv.appendChild(groupTitle);
-
-                const brandList = document.createElement("div");
-                brandList.classList.add("brand-list");
-
-                data[anagrup].forEach(item => {
-                    const brandItem = document.createElement("div");
-                    brandItem.classList.add("brand");
-                    brandItem.textContent = item.Markaadı;
-                    brandList.appendChild(brandItem);
-
-                    if (item.Alternatifler && item.Alternatifler.length > 0) {
-                        const altItem = document.createElement("div");
-                        altItem.classList.add("alternatives");
-                        altItem.textContent = item.Alternatifler.join(", ");
-                        brandList.appendChild(altItem);
-                    }
-                });
-
-                groupDiv.appendChild(brandList);
-                container.appendChild(groupDiv);
-
-                groupTitle.addEventListener("click", () => {
-                    brandList.style.display = brandList.style.display === "none" ? "block" : "none";
-                });
-            });
-        })
-        .catch(error => {
+            jsonData = await response.json();
+            renderList();
+        } catch (error) {
             console.error('JSON yüklenirken hata oluştu:', error);
             document.getElementById("brand-container").textContent = "Veri yüklenemedi.";
+        }
+    }
+
+    function renderList(filter = "") {
+        const container = document.getElementById("brand-container");
+        container.innerHTML = "";
+
+        Object.keys(jsonData).forEach(anagrup => {
+            const groupDiv = document.createElement("div");
+            groupDiv.classList.add("group");
+
+            const groupTitle = document.createElement("div");
+            groupTitle.classList.add("group-title");
+            groupTitle.textContent = anagrup;
+            groupDiv.appendChild(groupTitle);
+
+            const brandList = document.createElement("div");
+            brandList.classList.add("brand-list");
+
+            jsonData[anagrup].forEach(item => {
+                const brandItem = document.createElement("div");
+                brandItem.classList.add("brand");
+
+                if (filter && !item.Markaadı.toLowerCase().includes(filter) &&
+                    !item.Alternatifler.some(alt => alt.toLowerCase().includes(filter))) {
+                    return;
+                }
+
+                brandItem.textContent = item.Markaadı;
+                brandList.appendChild(brandItem);
+
+                if (item.Alternatifler && item.Alternatifler.length > 0) {
+                    const altItem = document.createElement("div");
+                    altItem.classList.add("alternatives");
+                    altItem.textContent = item.Alternatifler.join(", ");
+                    brandList.appendChild(altItem);
+                }
+            });
+
+            groupDiv.appendChild(brandList);
+            container.appendChild(groupDiv);
+
+            groupTitle.addEventListener("click", () => {
+                brandList.style.display = brandList.style.display === "none" ? "block" : "none";
+            });
         });
+    }
+
+    document.getElementById("search").addEventListener("input", (e) => {
+        renderList(e.target.value.toLowerCase());
+    });
+
+    loadData();
 </script>
 
 </body>
