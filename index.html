@@ -22,13 +22,13 @@
             text-align: center;
         }
         .search-box {
-            width: calc(100% - 20px); /* Prevents overflow */
+            width: calc(100% - 20px);
             padding: 10px;
             font-size: 16px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box; /* Ensure padding is included in width */
+            box-sizing: border-box;
         }
         .group {
             margin-bottom: 10px;
@@ -46,7 +46,7 @@
         .group-title span {
             cursor: pointer;
             font-size: 20px;
-            margin-right: 5px; /* Reduced space between button and text */
+            margin-right: 5px;
         }
         .brand-list {
             display: none;
@@ -146,14 +146,17 @@
             groupDiv.appendChild(brandList);
             container.appendChild(groupDiv);
 
+            // Always ensure the collapse button works
             collapseButton.addEventListener("click", () => {
-                brandList.style.display = brandList.style.display === "none" ? "block" : "none";
-                collapseButton.textContent = brandList.style.display === "none" ? ">" : "↓";
+                // Toggle the display on each click
+                const isHidden = brandList.style.display === "none";
+                brandList.style.display = isHidden ? "block" : "none";
+                collapseButton.textContent = isHidden ? "↓" : ">";
             });
 
             if (filter) {
-                brandList.style.display = "block";
-                collapseButton.textContent = "↓";
+                brandList.style.display = "block"; // Show the list if filtering
+                collapseButton.textContent = "↓"; // Set button to 'down' when filtered
             }
         });
 
