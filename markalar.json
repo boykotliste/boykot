@@ -19,12 +19,18 @@
         { "Marka": "Sisal Şans", "Alts": [] },
         { "Marka": "Su-Tur Sun Turizm San. A.Ş.", "Alts": [] },
         { "Marka": "Uyum Gıda", "Alts": [] }
+        { "Marka": "Türk Petrol", "Alts": [] }
     ],
     "Bankalar": [
         { "Marka": "Halk Bank", "Alts": [] },
         { "Marka": "Ziraat Bankası", "Alts": [] },
         { "Marka": "Vakıf Bank", "Alts": [] },
         { "Marka": "Yapı Kredi", "Alts": [] }
+    ],
+    "Kocadağ Ailesi": [
+        { "Marka": "Espressolab", "Alts": [] },
+        { "Marka": "Selfiş", "Alts": [] },
+        { "Marka": "Sütiş", "Alts": [] },
     ],
     "Doğuş Grubu": [
         { "Marka": "Adile Sultan Sarayı Kandilli", "Alts": [] },
