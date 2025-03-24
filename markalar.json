@@ -1,13 +1,18 @@
-[
-    {
-      "Grup": "Gıda",
-      "Marka": "Marka 1",
-      "Alts": ["Alternatif 1", "Alternatif 2"]
-    },
-    {
-      "Grup": "Elektronik",
-      "Marka": "Marka 2",
-      "Alts": ["Alternatif A", "Alternatif B"]
-    }
-  ]
-  
+{
+    "Gıda": [
+        {
+            "Marka": "Ülker",
+            "Alts": ["Eti", "Torku"]
+        },
+        {
+            "Marka": "Coca Cola",
+            "Alts": ["Pepsi", "Fuse Tea"]
+        }
+    ],
+    "Tekstil": [
+        {
+            "Marka": "LC Waikiki",
+            "Alts": ["Koton", "Mavi"]
+        }
+    ]
+}
