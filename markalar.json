@@ -7,6 +7,17 @@
         { "Marka": "Godiva", "Alts": [] },
         { "Marka": "Dolby Tıraş Bıçakları", "Alts": [] }
     ],
+     "Koç Holding": [
+        { "Marka": "Beko", "Alts": [] },
+        { "Marka": "Arçelik", "Alts": [] },
+        { "Marka": "Altus", "Alts": [] },
+        { "Marka": "Avis", "Alts": [] },
+        { "Marka": "Sek", "Alts": [] },
+        { "Marka": "Tat", "Alts": [] },
+        { "Marka": "Koçtaş", "Alts": [] },
+        { "Marka": "Opet", "Alts": [] },
+        { "Marka": "Aygaz", "Alts": [] }
+    ],
     "Demirören Grubu": [
         { "Marka": "D-Smart", "Alts": [] },
         { "Marka": "Demirören İstiklal A.V.M.", "Alts": [] },
@@ -18,8 +29,11 @@
         { "Marka": "Misli.com", "Alts": [] },
         { "Marka": "Sisal Şans", "Alts": [] },
         { "Marka": "Su-Tur Sun Turizm San. A.Ş.", "Alts": [] },
-        { "Marka": "Uyum Gıda", "Alts": [] }
-        { "Marka": "Türk Petrol", "Alts": [] }
+        { "Marka": "Uyum Gıda", "Alts": [] },
+        { "Marka": "Türk Petrol", "Alts": [] },
+        { "Marka": "Milli Piyango", "Alts": [] },
+        { "Marka": "Kanal D", "Alts": [] },
+        { "Marka": "CNN Türk", "Alts": [] }
     ],
     "Bankalar": [
         { "Marka": "Halk Bank", "Alts": [] },
@@ -31,6 +45,12 @@
         { "Marka": "Espressolab", "Alts": [] },
         { "Marka": "Selfiş", "Alts": [] },
         { "Marka": "Sütiş", "Alts": [] },
+    ],
+     "Alibaba Group": [
+        { "Marka": "Trendyol", "Alts": [] }
+    ],
+    "CK Hutchison Holdings": [
+        { "Marka": "Watsons", "Alts": [] }
     ],
     "Doğuş Grubu": [
         { "Marka": "Adile Sultan Sarayı Kandilli", "Alts": [] },
