@@ -1,0 +1,13 @@
+[
+    {
+      "Anagrupadi": "Gıda",
+      "Markaadı": "Marka 1",
+      "Alternatifler": ["Alternatif 1", "Alternatif 2"]
+    },
+    {
+      "Anagrupadi": "Elektronik",
+      "Markaadı": "Marka 2",
+      "Alternatifler": ["Alternatif A", "Alternatif B"]
+    }
+  ]
+  

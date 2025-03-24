@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boykot Listesi</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; margin: 0; }
+        .brand { display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid #ccc; }
+        .brand img { max-width: 100px; height: auto; margin-bottom: 10px; }
+        .alternative { color: green; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; }
+        h1 { text-align: center; }
+    </style>
+</head>
+<body>
+
+<h1>Boykot Edilen Markalar</h1>
+<input type="text" id="search" placeholder="Marka ara..." onkeyup="filterBrands()">
+
+<div id="brand-list"></div>
+
+<script>
+    let brandsData = [];
+
+    // JSON dosyasını GitHub'dan çek
+    fetch('https://raw.githubusercontent.com/yourusername/yourrepo/main/brands.json')
+        .then(response => response.json())
+        .then(data => {
+            brandsData = data;  // JSON verisini al ve brandsData'ya ata
+            displayBrands(brandsData);  // Veriyi ekrana bastır
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+
+    // Veriyi ekrana bastıran fonksiyon
+    function displayBrands(data) {
+        const brandList = document.getElementById("brand-list");
+        brandList.innerHTML = ''; // Önceden var olan içeriği temizle
+
+        data.forEach(group => {
+            const groupDiv = document.createElement("div");
+            groupDiv.classList.add("brand");
+
+            const groupTitle = document.createElement("h3");
+            groupTitle.textContent = group.Anagrupadi;
+            groupDiv.appendChild(groupTitle);
+
+            const brandName = document.createElement("p");
+            brandName.textContent = group.Markaadı;
+            groupDiv.appendChild(brandName);
+
+            const alternatives = document.createElement("p");
+            alternatives.classList.add("alternative");
+            alternatives.textContent = `Alternatifler: ${group.Alternatifler.join(", ")}`;
+            groupDiv.appendChild(alternatives);
+
+            brandList.appendChild(groupDiv);
+        });
+    }
+
+    // Arama fonksiyonu
+    function filterBrands() {
+        const searchValue = document.getElementById("search").value.toLowerCase();
+        const filteredBrands = brandsData.filter(brand => 
+            brand.Markaadı.toLowerCase().includes(searchValue) || 
+            brand.Anagrupadi.toLowerCase().includes(searchValue)
+        );
+        displayBrands(filteredBrands);
+    }
+</script>
+
+</body>
+</html>
