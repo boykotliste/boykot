@@ -1,13 +1,13 @@
 [
     {
-      "Anagrupadi": "Gıda",
-      "Markaadı": "Marka 1",
-      "Alternatifler": ["Alternatif 1", "Alternatif 2"]
+      "Grup": "Gıda",
+      "Marka": "Marka 1",
+      "Alts": ["Alternatif 1", "Alternatif 2"]
     },
     {
-      "Anagrupadi": "Elektronik",
-      "Markaadı": "Marka 2",
-      "Alternatifler": ["Alternatif A", "Alternatif B"]
+      "Grup": "Elektronik",
+      "Marka": "Marka 2",
+      "Alts": ["Alternatif A", "Alternatif B"]
     }
   ]
   
